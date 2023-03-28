@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>tiles.js: Draggable Sortable Tile Grid Examples</title>
+<style>
+  html,* { font-family: 'Inter'; box-sizing: border-box; }
+body { background-color: #fafafa; line-height:1.6;}
+.lead { font-size: 1.5rem; font-weight: 300; }
+.container { margin: 150px auto; max-width: 960px; }
+.btn { padding: 1.25rem; border: 0; border-radius: 3px; background-color: #4F46E5; color: #fff; cursor: pointer; margin: 2rem auto; }
+</style>
+</head>
+
+<body><div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="https://www.jqueryscript.net/layout/draggable-sortable-tile-grid.html">Download This Plugin</a></li>
+<li><a href="https://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul><div id="carbon-block"></div>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+  <div class="container">
+    <h1>tiles.js: Draggable Sortable Tile Grid Examples</h1>
+    <p class="lead">A jQuery layout plugin that enables users to easily display content in the form of 'tiles'</p>
+    <h2>Basic Example</h2>
+    <div id="basic"></div>
+    <button class="btn" id="add_basic">Add More Tiles</button>
+    <h2>Image Example</h2>
+    <div id="image"></div>
+    <h2>Sort & Shuffle Example</h2>
+    <button class="btn" id="shuffle">Shuffle</button> <button class="btn" id="sort">Sort</button>
+    <div id="advanced"></div>
+
+  </div>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="pub/js/tiles.js"></script>
+<script>
+// basic example
+const basic = new Tiles({
+  container: 'basic',
+  animate_factor: 1.1,
+  num_horizontal: 6
+})
+basic.addTile({ title: 'jquery' })
+basic.addTile({ title: 'script' })
+basic.addTile({ title: 'net' })
+const button = $('#add_basic')
+button[0].addEventListener("click", function () {
+  basic.addTile({ title: 'new tile' })
+})
+// image example
+const imagelist = ['https://source.unsplash.com/_xY3yCnVyps/600x400',
+    'https://source.unsplash.com/0u6fBh1CRm8/600x400',
+    'https://source.unsplash.com/Xdp5KF3QEDg/600x400',
+    'https://source.unsplash.com/W4eDH3-hkAU/600x400',
+    'https://source.unsplash.com/8kU05zoD77w/600x400',
+    'https://source.unsplash.com/P_mprr4eka8/600x400']
+
+// instantiate a new Tiles instance
+const image = new Tiles({
+    container: 'image',
+    width: 300,
+    height: 200,
+    num_horizontal: 3,
+    nodrag: true,
+    animate_factor: 1.05  // customize how much each tile grows on hover
+})
+// add the pictures
+for (let i = 1; i < 7; i++) {
+    image.addTile({
+        img_src: imagelist[i - 1],
+        hover_color: 'black'
+    })
+}
+// shuffle example
+const demoPics = ['https://upload.wikimedia.org/wikipedia/commons/2/25/Playing_card_spade_A.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/d/d5/Playing_card_heart_2.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/6/6b/Playing_card_club_3.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/2/20/Playing_card_diamond_4.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/9/94/Playing_card_spade_5.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/c/cd/Playing_card_heart_6.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/4/4b/Playing_card_club_7.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/7/78/Playing_card_diamond_8.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/e/e0/Playing_card_spade_9.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/9/98/Playing_card_heart_10.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/b/b7/Playing_card_club_J.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/0/0b/Playing_card_diamond_Q.svg',
+    'https://upload.wikimedia.org/wikipedia/commons/9/9f/Playing_card_spade_K.svg']
+
+// instantiate a new Tiles instance
+const advanced = new Tiles({
+    container: 'advanced',
+    width: 90,
+    height: 140,
+    num_horizontal: 7
+})
+// add each card in a for loop
+for (let i = 1; i < 14; i++) {
+    advanced.addTile({
+        title: i,
+        img_src: demoPics[i - 1]
+    })
+}
+// add listeners to buttons for shuffling and sorting
+const shuffle = $('#shuffle')
+shuffle[0].addEventListener("click", function () {
+    advanced.shuffle()
+})
+const sort = $('#sort')
+sort[0].addEventListener("click", function () {
+    advanced.sort()
+})
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<script>
+try {
+  fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
+    return true;
+  }).catch(function(e) {
+    var carbonScript = document.createElement("script");
+    carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+    carbonScript.id = "_carbonads_js";
+    document.getElementById("carbon-block").appendChild(carbonScript);
+  });
+} catch (error) {
+  console.log(error);
+}
+</script>
+</body>
+</html>

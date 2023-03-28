@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>tiles.js examples</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- first load jQuery -->
+    <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- then load our library -->
+    <script defer type="text/javascript" src='js/tiles.js'></script>
+    <!-- then load a script that depends on the library -->
+    <script defer type="text/javascript" src='js/examples.js'></script>
+</head>
+
+<body id="preview">
+    <div id='quick-navigation'></div>
+    <h1 class="code-line" data-line-start=0 data-line-end=1><a id="Usage_examples_0"></a>Usage examples</h1>
+    <h2 class="code-line" data-line-start=2 data-line-end=3><a id="Quick_Navigation_2"></a>Quick Navigation</h2>
+    <ul>
+        <li class="has-line-data" data-line-start="3" data-line-end="4"><a href="./index.html">Home</a></li>
+        <li class="has-line-data" data-line-start="4" data-line-end="5"><a href="./api-v1.html">Documentation</a></li>
+        <li class="has-line-data" data-line-start="5" data-line-end="6"><a href="#basic-functionality">Basic demo</a>
+        </li>
+        <li class="has-line-data" data-line-start="6" data-line-end="7"><a href="#e-commerce">Online shop</a></li>
+        <li class="has-line-data" data-line-start="7" data-line-end="8"><a href="#shuffle-and-sort">Shuffle and sort
+                tiles</a></li>
+        <li class="has-line-data" data-line-start="8" data-line-end="9"><a
+                href="#disabling-and-flipping-tiles">Disabling and flipping tiles</a></li>
+        <li class="has-line-data" data-line-start="9" data-line-end="10"><a href="#tiles-as-link-icons">Tiles as link
+                icons</a></li>
+        <li class="has-line-data" data-line-start="10" data-line-end="11"><a href="#tiles-as-decorations">Tiles as
+                decorations</a></li>
+        <li class="has-line-data" data-line-start="11" data-line-end="12"><a href="#displaying-pictures">Displaying
+                pictures</a></li>
+        <li class="has-line-data" data-line-start="12" data-line-end="13"><a href="#future-plans">Future plans</a></li>
+    </ul>
+    <div id='basic-functionality'></div>
+    <h3 class="code-line" data-line-start=15 data-line-end=16><a id="Basic_functionality_15"></a>Basic functionality
+    </h3>
+    <p class="has-line-data" data-line-start="16" data-line-end="17">The simplest thing you can do with this library is
+        just to create a bunch of tiles.</p>
+    <p class="has-line-data" data-line-start="18" data-line-end="19">Note that before you get started, you should have
+        an empty <code>&lt;div&gt;</code> set up in your html file with a unique <code>id</code> that you can pass to
+        the library. It can be as simple as this:</p>
+    <pre><code class="has-line-data" data-line-start="20" data-line-end="22" class="language-html"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">'demo'</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</code></pre>
+    <p class="has-line-data" data-line-start="22" data-line-end="23">Once you have a div ready, you can write a few
+        simple lines of code to make some tiles:</p>
+    <pre><code class="has-line-data" data-line-start="24" data-line-end="41" class="language-javascript"><span class="hljs-comment">// instantiate a new Tiles instance</span>
+<span class="hljs-keyword">const</span> lib = <span class="hljs-keyword">new</span> Tiles({
+    container: <span class="hljs-string">'demo1'</span>,
+    animate_factor: <span class="hljs-number">1.1</span>,
+    num_horizontal: <span class="hljs-number">6</span>  <span class="hljs-comment">// caps the max number of horizontal tiles</span>
+})
+lib.addTile({ title: <span class="hljs-string">'Here'</span> })
+lib.addTile({ title: <span class="hljs-string">'are'</span> })
+lib.addTile({ title: <span class="hljs-string">'some'</span> })
+lib.addTile({ title: <span class="hljs-string">'tiles.'</span> })
+
+<span class="hljs-comment">// adds a listener to a button that allows more tiles to be added</span>
+<span class="hljs-keyword">const</span> button = $(<span class="hljs-string">'#add_demo1'</span>)
+button[<span class="hljs-number">0</span>].addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    lib.addTile({ title: <span class="hljs-string">'new tile'</span> })
+})
+</code></pre>
+    <p class="has-line-data" data-line-start="41" data-line-end="42">Rendered output:</p>
+    <button id='add_demo1'>Click here to add more tiles below</button>
+    <div id="demo1"></div>
+    <div id='e-commerce'></div>
+    <h3 class="code-line" data-line-start=43 data-line-end=44><a id="Ecommerce_43"></a>E-commerce</h3>
+    <p class="has-line-data" data-line-start="44" data-line-end="45">Perhaps you are selling items in an online store
+        and would like a quick way to display the items you have for sale, you can quickly display your items with tiles
+        and even customize their hover color. You can then also add links to each products' description page. Note that
+        links are not added here, but they can be easily added by specifying a <code>clickLink</code> attribute.</p>
+    <pre><code class="has-line-data" data-line-start="46" data-line-end="79" class="language-javascript"><span class="hljs-comment">// instantiate a new Tiles instance</span>
+<span class="hljs-keyword">const</span> lib2 = <span class="hljs-keyword">new</span> Tiles({
+    container: <span class="hljs-string">'demo2'</span>,
+    width: <span class="hljs-number">150</span>,
+    height: <span class="hljs-number">150</span>
+})
+lib2.addTile({
+    title: <span class="hljs-string">'Orange'</span>,
+    img_src: <span class="hljs-string">'https://www.mz-store.com/blog/wp-content/uploads_en/2020/11/shutterstock_342874121.jpg'</span>,
+    hover_color: <span class="hljs-string">'orange'</span>,
+    clickLink: <span class="hljs-string">''</span>  <span class="hljs-comment">// remember to add links to each product page</span>
+})
+lib2.addTile({
+    title: <span class="hljs-string">'Apple'</span>,
+    img_src: <span class="hljs-string">'https://i2.wp.com/ceklog.kindel.com/wp-content/uploads/2013/02/firefox_2018-07-10_07-50-11.png?w=641&amp;ssl=1'</span>,
+    hover_color: <span class="hljs-string">'red'</span>
+})
+lib2.addTile({
+    title: <span class="hljs-string">'Lychee'</span>,
+    img_src: <span class="hljs-string">'https://images-prod.healthline.com/hlcmsresource/images/AN_images/lychees-1296x728-feature.jpg'</span>,
+    hover_color: <span class="hljs-string">'pink'</span>
+})
+lib2.addTile({
+    title: <span class="hljs-string">'Avocado'</span>,
+    img_src: <span class="hljs-string">'https://www.tasteofhome.com/wp-content/uploads/2018/02/shutterstock_263066297.jpg'</span>,
+    hover_color: <span class="hljs-string">'limegreen'</span>
+})
+lib2.addTile({
+    title: <span class="hljs-string">'Grapes!'</span>,
+    img_src: <span class="hljs-string">'https://keyassets.timeincuk.net/inspirewp/live/wp-content/uploads/sites/34/2019/07/marselan-wiki-min.jpg'</span>,
+    hover_color: <span class="hljs-string">'purple'</span>
+})
+</code></pre>
+    <p class="has-line-data" data-line-start="79" data-line-end="80">Rendered output:</p>
+    <div id='demo2'></div>
+    <div id='shuffle-and-sort'></div>
+    <h3 class="code-line" data-line-start=81 data-line-end=82><a id="Shuffle_and_sort_81"></a>Shuffle and sort</h3>
+    <p class="has-line-data" data-line-start="82" data-line-end="83">This library also comes with built-in shuffle and
+        sorting functions. You can dynamically rearrange each tile easily with this function. Users can also drag and
+        drop tiles to rearrange them as well. Here is a quick demo of this functionality with some playing cards:</p>
+    <pre><code class="has-line-data" data-line-start="84" data-line-end="123" class="language-javascript"><span class="hljs-comment">// some demo playing card pictures</span>
+<span class="hljs-keyword">const</span> demoPics = [<span class="hljs-string">'https://upload.wikimedia.org/wikipedia/commons/2/25/Playing_card_spade_A.svg'</span>,
+    <span class="hljs-string">'https://upload.wikimedia.org/wikipedia/commons/d/d5/Playing_card_heart_2.svg'</span>,
+    <span class="hljs-string">'https://upload.wikimedia.org/wikipedia/commons/6/6b/Playing_card_club_3.svg'</span>,
+    <span class="hljs-string">'https://upload.wikimedia.org/wikipedia/commons/2/20/Playing_card_diamond_4.svg'</span>,
+    <span class="hljs-string">'https://upload.wikimedia.org/wikipedia/commons/9/94/Playing_card_spade_5.svg'</span>,
+    <span class="hljs-string">'https://upload.wikimedia.org/wikipedia/commons/c/cd/Playing_card_heart_6.svg'</span>,
+    <span class="hljs-string">'https://upload.wikimedia.org/wikipedia/commons/4/4b/Playing_card_club_7.svg'</span>,
+    <span class="hljs-string">'https://upload.wikimedia.org/wikipedia/commons/7/78/Playing_card_diamond_8.svg'</span>,
+    <span class="hljs-string">'https://upload.wikimedia.org/wikipedia/commons/e/e0/Playing_card_spade_9.svg'</span>,
+    <span class="hljs-string">'https://upload.wikimedia.org/wikipedia/commons/9/98/Playing_card_heart_10.svg'</span>,
+    <span class="hljs-string">'https://upload.wikimedia.org/wikipedia/commons/b/b7/Playing_card_club_J.svg'</span>,
+    <span class="hljs-string">'https://upload.wikimedia.org/wikipedia/commons/0/0b/Playing_card_diamond_Q.svg'</span>,
+    <span class="hljs-string">'https://upload.wikimedia.org/wikipedia/commons/9/9f/Playing_card_spade_K.svg'</span>]
+
+<span class="hljs-comment">// instantiate a new Tiles instance</span>
+<span class="hljs-keyword">const</span> lib3 = <span class="hljs-keyword">new</span> Tiles({
+    container: <span class="hljs-string">'demo3'</span>,
+    width: <span class="hljs-number">90</span>,
+    height: <span class="hljs-number">140</span>,
+    num_horizontal: <span class="hljs-number">7</span>
+})
+<span class="hljs-comment">// add each card in a for loop</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">14</span>; i++) {
+    lib3.addTile({
+        title: i,
+        img_src: demoPics[i - <span class="hljs-number">1</span>]
+    })
+}
+<span class="hljs-comment">// add listeners to buttons for shuffling and sorting</span>
+<span class="hljs-keyword">const</span> shuffle = $(<span class="hljs-string">'#shuffle'</span>)
+shuffle[<span class="hljs-number">0</span>].addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    lib3.shuffle()
+})
+<span class="hljs-keyword">const</span> sort = $(<span class="hljs-string">'#sort'</span>)
+sort[<span class="hljs-number">0</span>].addEventListener(<span class="hljs-string">"click"</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    lib3.sort()
+})
+</code></pre>
+    <p class="has-line-data" data-line-start="123" data-line-end="124">Rendered output:</p>
+    <button id='shuffle'>Shuffle cards</button>
+    <button id='sort'>Sort cards</button>
+    <div id='demo3'></div>
+    <div id='disabling-and-flipping-tiles'></div>
+    <h3 class="code-line" data-line-start=125 data-line-end=126><a id="Disabling_and_flipping_tiles_125"></a>Disabling
+        and flipping tiles</h3>
+    <p class="has-line-data" data-line-start="126" data-line-end="127">If you are creating a game with tiles and there
+        is a need to periodically disable and enable tiles based on the rules of the game, you can do that too. Here is
+        a demonstration with a simple matching game, where the goal is to flip two tiles that have the same image. If
+        the images are not the same, then both tiles flip back. We can see why we would need to disable some tiles to
+        enable the correct operation of this game. <code>tiles.js</code> also allows you to pass in callback functions
+        which are called when the tile is clicked. For this demonstration, a demo callback function is provided, but
+        you’ll have to customize your own for your specific use case.</p>
+    <pre><code class="has-line-data" data-line-start="128" data-line-end="187" class="language-javascript"><span class="hljs-comment">// helper for synchronous waiting</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sleep</span>(<span class="hljs-params">ms</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(resolve =&gt; setTimeout(resolve, ms));
+}
+
+<span class="hljs-keyword">let</span> prev_tile = <span class="hljs-literal">null</span>
+
+<span class="hljs-comment">// function to pass in as a callback to the tile</span>
+<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">demo</span>(<span class="hljs-params">data</span>) </span>{
+    <span class="hljs-comment">// game logic</span>
+    lib4.disable(data.id)
+    <span class="hljs-keyword">if</span> (!prev_tile) {
+        prev_tile = {
+            id: data.id,
+            img: data.curr_img
+        }
+        <span class="hljs-keyword">return</span>
+    }
+    <span class="hljs-keyword">let</span> score = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'score'</span>)
+    <span class="hljs-keyword">if</span> (data.id !== prev_tile.id &amp;&amp; data.curr_img === prev_tile.img) {
+        score.innerText = <span class="hljs-built_in">parseInt</span>(score.innerText) + <span class="hljs-number">10</span>
+        prev_tile = <span class="hljs-literal">null</span>
+    } <span class="hljs-keyword">else</span> {
+        lib4.disableAll()
+        <span class="hljs-keyword">await</span> sleep(<span class="hljs-number">800</span>)
+        lib4.enableAll()
+        <span class="hljs-keyword">if</span> (prev_tile &amp;&amp; data) {
+            lib4.flip(prev_tile.id)
+            lib4.flip(data.id)
+            lib4.enable(prev_tile.id)
+            lib4.enable(data.id)
+            score.innerText = <span class="hljs-built_in">parseInt</span>(score.innerText) - <span class="hljs-number">5</span>
+        }
+        prev_tile = <span class="hljs-literal">null</span>
+    }
+}
+<span class="hljs-comment">// game images</span>
+<span class="hljs-keyword">const</span> matchPics = [<span class="hljs-string">'static/cat_ball.jpg'</span>,
+    <span class="hljs-string">'static/cat_walk.jpg'</span>,
+    <span class="hljs-string">'static/cat_walk.jpg'</span>,
+    <span class="hljs-string">'static/cat_lie.jpg'</span>,
+    <span class="hljs-string">'static/cat_ball.jpg'</span>,
+    <span class="hljs-string">'static/cat_lie.jpg'</span>]
+<span class="hljs-comment">// instantiate a new Tiles instance</span>
+<span class="hljs-keyword">const</span> lib4 = <span class="hljs-keyword">new</span> Tiles({
+    container: <span class="hljs-string">'demo4'</span>,
+    width: <span class="hljs-number">200</span>,
+    height: <span class="hljs-number">200</span>,
+    num_horizontal: <span class="hljs-number">3</span>
+})
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; matchPics.length; i++) {
+    lib4.addTile({
+        title: <span class="hljs-string">'Click me!'</span>,
+        img_src: <span class="hljs-string">'static/question_mark.PNG'</span>,
+        alt_img: matchPics[i],  <span class="hljs-comment">// set the alt_image for when the tile is clicked</span>
+        click_callback: demo  <span class="hljs-comment">// pass in the callback function</span>
+    })
+}
+</code></pre>
+    <p class="has-line-data" data-line-start="187" data-line-end="188">Rendered output:</p>
+    <span>Score: </span><span id='score'>0</span>
+    <div id='demo4'></div>
+    <div id='tiles-as-link-icons'></div>
+    <h3 class="code-line" data-line-start=189 data-line-end=190><a id="Tiles_as_link_icons_189"></a>Tiles as link icons
+    </h3>
+    <p class="has-line-data" data-line-start="190" data-line-end="191">You can use small tiles to act as links to your
+        own social media pages or other services. A simple demo can be constructed as follows:</p>
+    <pre><code class="has-line-data" data-line-start="192" data-line-end="217" class="language-javascript"><span class="hljs-comment">// instantiate a new Tiles instance</span>
+<span class="hljs-keyword">const</span> lib5 = <span class="hljs-keyword">new</span> Tiles({
+    container: <span class="hljs-string">'demo5'</span>,
+    height: <span class="hljs-number">30</span>,
+    width: <span class="hljs-number">30</span>
+})
+<span class="hljs-comment">// add all relevant links and their images</span>
+lib5.addTile({
+    img_src: <span class="hljs-string">'https://cdn.iconscout.com/icon/free/png-256/github-163-761603.png'</span>,
+    clickLink: <span class="hljs-string">'https://github.com/'</span>,
+    hover_color: <span class="hljs-string">'gray'</span>
+})
+
+lib5.addTile({
+    img_src: <span class="hljs-string">'https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png'</span>,
+    clickLink: <span class="hljs-string">'https://google.com/'</span>,
+    hover_color: <span class="hljs-string">'gray'</span>
+})
+
+lib5.addTile({
+    img_src: <span class="hljs-string">'https://upload.wikimedia.org/wikipedia/commons/e/ef/Stack_Overflow_icon.svg'</span>,
+    clickLink: <span class="hljs-string">'https://stackoverflow.com/'</span>,
+    hover_color: <span class="hljs-string">'gray'</span>
+})
+</code></pre>
+    <p class="has-line-data" data-line-start="217" data-line-end="218">Rendered output:</p>
+    <div id='demo5'></div>
+    <div id='tiles-as-decorations'></div>
+    <h3 class="code-line" data-line-start=219 data-line-end=220><a id="Tiles_as_decorations_219"></a>Tiles as
+        decorations</h3>
+    <p class="has-line-data" data-line-start="220" data-line-end="221">You can even use tiles as a background for your
+        website or as little decorations. The options available in the constructor allow you to easily customize their
+        size and positioning.</p>
+    <pre><code class="has-line-data" data-line-start="222" data-line-end="238" class="language-javascript"><span class="hljs-comment">// instantiate a new Tiles instance</span>
+<span class="hljs-keyword">const</span> lib6 = <span class="hljs-keyword">new</span> Tiles({
+    container: <span class="hljs-string">'demo6'</span>,
+    color_cycle: <span class="hljs-literal">true</span>,  <span class="hljs-comment">// turn on color cycling for a nice effect</span>
+    animate: <span class="hljs-literal">false</span>,
+    tile_gap: <span class="hljs-number">8</span>,
+    nodrag: <span class="hljs-literal">true</span>,
+    height: <span class="hljs-number">40</span>,
+    width: <span class="hljs-number">40</span>,
+    num_horizontal: <span class="hljs-number">18</span>
+})
+<span class="hljs-comment">// a simple for loop that adds decorative tiles</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">90</span>; i++) {
+    lib6.addTile()
+}
+</code></pre>
+    <p class="has-line-data" data-line-start="238" data-line-end="239">Rendered output:</p>
+    <div id='demo6'></div>
+    <div id='displaying-pictures'></div>
+    <h3 class="code-line" data-line-start=240 data-line-end=241><a id="Displaying_pictures_240"></a>Displaying pictures
+    </h3>
+    <p class="has-line-data" data-line-start="241" data-line-end="242">You can also easily create tiles without text and
+        have them just display vivid full-frame pictures. You can customize the size of each tile through the
+        constructor and also customize how many of them to display in a row, as well as being able to customize their
+        highlight color and hover animation.</p>
+    <pre><code class="has-line-data" data-line-start="243" data-line-end="267" class="language-javascript"><span class="hljs-keyword">const</span> vacationPics = [<span class="hljs-string">'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-eiffel-tower.jpg'</span>,
+    <span class="hljs-string">'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-mont-st-michel.jpg'</span>,
+    <span class="hljs-string">'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-versailles-gardens.jpg'</span>,
+    <span class="hljs-string">'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-chateau-de-chenonceau.jpg'</span>,
+    <span class="hljs-string">'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-calanques-national-park.jpg'</span>,
+    <span class="hljs-string">'https://www.planetware.com/wpimages/2020/02/france-in-pictures-beautiful-places-to-photograph-amiens-cathedral.jpg'</span>]
+
+<span class="hljs-comment">// instantiate a new Tiles instance</span>
+<span class="hljs-keyword">const</span> lib7 = <span class="hljs-keyword">new</span> Tiles({
+    container: <span class="hljs-string">'demo7'</span>,
+    width: <span class="hljs-number">300</span>,
+    height: <span class="hljs-number">200</span>,
+    num_horizontal: <span class="hljs-number">3</span>,
+    nodrag: <span class="hljs-literal">true</span>,
+    animate_factor: <span class="hljs-number">1.05</span>  <span class="hljs-comment">// customize how much each tile grows on hover</span>
+})
+<span class="hljs-comment">// add the pictures</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">7</span>; i++) {
+    lib7.addTile({
+        img_src: vacationPics[i - <span class="hljs-number">1</span>],
+        hover_color: <span class="hljs-string">'salmon'</span>
+    })
+}
+</code></pre>
+    <p class="has-line-data" data-line-start="267" data-line-end="268">Rendered output:</p>
+    <div id='demo7'></div>
+    <div id='future-plans'></div>
+    <h3 class="code-line" data-line-start=269 data-line-end=270><a id="Future_plans_269"></a>Future plans</h3>
+    <p class="has-line-data" data-line-start="270" data-line-end="271">Tiles.js was made as the final project in an
+        introductory web programming course at the University of Toronto. While there are no current future plans for
+        development, you can already accomplish a lot with Tiles!</p>
+    <p class="has-line-data" data-line-start="272" data-line-end="273"><a href="#quick-navigation">Back to top</a></p>
+    <div style="float: right;">&copy; Copyright 2021 Haocheng Hu</div>
+</body>
+
+</html>

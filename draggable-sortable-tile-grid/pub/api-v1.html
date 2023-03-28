@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>tiles.js documentation</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body id="preview">
+    <h1 class="code-line" data-line-start=0 data-line-end=1><a id="API_and_documentation_0"></a>API and documentation
+    </h1>
+    <div id="quick-navigation"></div>
+    <h2 class="code-line" data-line-start=2 data-line-end=3><a id="Quick_Navigation_2"></a>Quick Navigation</h2>
+    <ul>
+        <li class="has-line-data" data-line-start="3" data-line-end="4"><a href="./index.html">Home</a></li>
+        <li class="has-line-data" data-line-start="4" data-line-end="5"><a href="#getting-started">Getting started</a>
+        </li>
+        <li class="has-line-data" data-line-start="5" data-line-end="6"><a href="#constructors">Constructors</a></li>
+        <li class="has-line-data" data-line-start="6" data-line-end="7"><a href="#api-methods">API</a></li>
+        <li class="has-line-data" data-line-start="7" data-line-end="8"><a href="./examples.html">Examples</a></li>
+    </ul>
+    <div id="getting-started"></div>
+    <h2 class="code-line" data-line-start=10 data-line-end=11><a id="Getting_started_10"></a>Getting started</h2>
+    <p class="has-line-data" data-line-start="11" data-line-end="12">To get started with tiles.js, you’ll need to
+        include <a href="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">jQuery</a> and <a
+            href="https://hhc97.github.io/tiles-js/pub/js/tiles.js">tiles.js</a> in your HTML source as shown below:</p>
+    <pre><code class="has-line-data" data-line-start="13" data-line-end="25" class="language-html"><span class="hljs-doctype">&lt;!DOCTYPE html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">html</span> <span class="hljs-attribute">lang</span>=<span class="hljs-value">"en"</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- first load jQuery --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">defer</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- then load tiles.js --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">defer</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/javascript"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'https://hhc97.github.io/tiles-js/pub/js/tiles.js'</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+    <span class="hljs-comment">&lt;!-- then load a script that depends on tiles.js --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">defer</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/javascript"</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">'js/examples.js'</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+</code></pre>
+    <p class="has-line-data" data-line-start="25" data-line-end="27">By default, tiles.js assigns itself to the global
+        <code>Tiles</code> variable when loaded. If the <code>Tiles</code> variable is already in use, it will not be
+        overwritten.<br>
+        Once loaded, you can get an instance of Tiles by calling its constructor:
+    </p>
+    <pre><code class="has-line-data" data-line-start="28" data-line-end="30" class="language-javascript"><span class="hljs-keyword">const</span> tiles = <span class="hljs-keyword">new</span> Tiles({container: <span class="hljs-string">'id'</span>})
+</code></pre>
+    <p class="has-line-data" data-line-start="30" data-line-end="31">Note that you <strong>must</strong> create a new
+        instance of <code>Tiles</code> for each section of tiles that you want to create, or there could be unintended
+        behavior.</p>
+    <div id="constructors"></div>
+    <h2 class="code-line" data-line-start=33 data-line-end=34><a id="Constructors_33"></a>Constructors</h2>
+    <p class="has-line-data" data-line-start="34" data-line-end="35">There is only one constructor required to use
+        tiles.js, and it has one required value, with a few other optional parameters. A constructor call with every
+        possible option is shown below:</p>
+    <pre><code class="has-line-data" data-line-start="36" data-line-end="48" class="language-javascript"><span class="hljs-keyword">new</span> Tiles({
+    container: <span class="hljs-string">'tile_container_div_id'</span>,
+    width: <span class="hljs-number">100</span>,
+    height: <span class="hljs-number">100</span>,
+    animate: <span class="hljs-literal">true</span>,
+    animate_factor: <span class="hljs-number">5</span>,
+    color_cycle: <span class="hljs-literal">true</span>,
+    nodrag: <span class="hljs-literal">true</span>,
+    tile_gap: <span class="hljs-number">30</span>,
+    num_horizontal: <span class="hljs-number">2</span>
+})
+</code></pre>
+    <p class="has-line-data" data-line-start="48" data-line-end="50">The parameters are provided in the form of a
+        javascript object, so optional parameters can be left out if desired.<br>
+        <strong>Required parameters</strong>
+    </p>
+    <ul>
+        <li class="has-line-data" data-line-start="50" data-line-end="55"><strong>container</strong>
+            <ul>
+                <li class="has-line-data" data-line-start="51" data-line-end="52"><code>Type</code>: <code>string</code>
+                </li>
+                <li class="has-line-data" data-line-start="52" data-line-end="53"><code>Default value</code>:
+                    <code>none</code>
+                </li>
+                <li class="has-line-data" data-line-start="53" data-line-end="55"><code>Description</code>: In order to
+                    use tiles.js, you must provide it a <code>&lt;div&gt;</code> element with a unique <code>id</code>
+                    in which you want to display tiles. The value of the <code>id</code> goes into this parameter.</li>
+            </ul>
+        </li>
+    </ul>
+    <p class="has-line-data" data-line-start="55" data-line-end="56"><strong>Optional parameters</strong></p>
+    <ul>
+        <li class="has-line-data" data-line-start="56" data-line-end="60"><strong>width</strong>
+            <ul>
+                <li class="has-line-data" data-line-start="57" data-line-end="58"><code>Type</code>:
+                    <code>number (integer)</code>
+                </li>
+                <li class="has-line-data" data-line-start="58" data-line-end="59"><code>Default value</code>:
+                    <code>100</code>
+                </li>
+                <li class="has-line-data" data-line-start="59" data-line-end="60"><code>Description</code>: The width
+                    you want the tiles in this section to be.</li>
+            </ul>
+        </li>
+        <li class="has-line-data" data-line-start="60" data-line-end="64"><strong>height</strong>
+            <ul>
+                <li class="has-line-data" data-line-start="61" data-line-end="62"><code>Type</code>:
+                    <code>number (integer)</code>
+                </li>
+                <li class="has-line-data" data-line-start="62" data-line-end="63"><code>Default value</code>:
+                    <code>100</code>
+                </li>
+                <li class="has-line-data" data-line-start="63" data-line-end="64"><code>Description</code>: The height
+                    you want the tiles in this section to be.</li>
+            </ul>
+        </li>
+        <li class="has-line-data" data-line-start="64" data-line-end="68"><strong>animate</strong>
+            <ul>
+                <li class="has-line-data" data-line-start="65" data-line-end="66"><code>Type</code>:
+                    <code>boolean</code>
+                </li>
+                <li class="has-line-data" data-line-start="66" data-line-end="67"><code>Default value</code>:
+                    <code>true</code>
+                </li>
+                <li class="has-line-data" data-line-start="67" data-line-end="68"><code>Description</code>: On hover,
+                    you can choose to allow the tiles to slightly expand in an animation. This gives the user a visual
+                    cue that the tile is being hovered across. The content in the tile will expand along with the tile.
+                </li>
+            </ul>
+        </li>
+        <li class="has-line-data" data-line-start="68" data-line-end="72"><strong>animate_factor</strong>
+            <ul>
+                <li class="has-line-data" data-line-start="69" data-line-end="70"><code>Type</code>:
+                    <code>number (float)</code>
+                </li>
+                <li class="has-line-data" data-line-start="70" data-line-end="71"><code>Default value</code>:
+                    <code>1.05</code>
+                </li>
+                <li class="has-line-data" data-line-start="71" data-line-end="72"><code>Description</code>: If
+                    <code>animate</code> is set to <code>true</code>, then you can optionally specify how much you want
+                    your tiles to expand when they are being hovered over. The default value of 5% looks good in most
+                    situations, but you have the option of choosing your own expansion factor.
+                </li>
+            </ul>
+        </li>
+        <li class="has-line-data" data-line-start="72" data-line-end="76"><strong>color_cycle</strong>
+            <ul>
+                <li class="has-line-data" data-line-start="73" data-line-end="74"><code>Type</code>:
+                    <code>boolean</code>
+                </li>
+                <li class="has-line-data" data-line-start="74" data-line-end="75"><code>Default value</code>:
+                    <code>false</code>
+                </li>
+                <li class="has-line-data" data-line-start="75" data-line-end="76"><code>Description</code>: This option
+                    enables the color gradient around each tile to constantly change color. The colors are generated
+                    randomly and slowly change randomly as well. It is useful for when the theme of the website is a
+                    little less serious!</li>
+            </ul>
+        </li>
+        <li class="has-line-data" data-line-start="76" data-line-end="80"><strong>nodrag</strong>
+            <ul>
+                <li class="has-line-data" data-line-start="77" data-line-end="78"><code>Type</code>:
+                    <code>boolean</code>
+                </li>
+                <li class="has-line-data" data-line-start="78" data-line-end="79"><code>Default value</code>:
+                    <code>false</code>
+                </li>
+                <li class="has-line-data" data-line-start="79" data-line-end="80"><code>Description</code>: By default,
+                    tiles in a section can be dragged around and the user can swap the positions of tiles by dragging
+                    and dropping. Setting this option to <code>true</code> will prevent tiles from being dragged, which
+                    is useful for when you have tiles that must display content in a certain order.</li>
+            </ul>
+        </li>
+        <li class="has-line-data" data-line-start="80" data-line-end="84"><strong>tile_gap</strong>
+            <ul>
+                <li class="has-line-data" data-line-start="81" data-line-end="82"><code>Type</code>:
+                    <code>number (integer)</code>
+                </li>
+                <li class="has-line-data" data-line-start="82" data-line-end="83"><code>Default value</code>:
+                    <code>30</code>
+                </li>
+                <li class="has-line-data" data-line-start="83" data-line-end="84"><code>Description</code>: This option
+                    adjusts the width of the gap between tiles.</li>
+            </ul>
+        </li>
+        <li class="has-line-data" data-line-start="84" data-line-end="88"><strong>num_horizontal</strong>
+            <ul>
+                <li class="has-line-data" data-line-start="85" data-line-end="86"><code>Type</code>:
+                    <code>number (integer)</code>
+                </li>
+                <li class="has-line-data" data-line-start="86" data-line-end="87"><code>Default value</code>:
+                    <code>Infinity</code>
+                </li>
+                <li class="has-line-data" data-line-start="87" data-line-end="88"><code>Description</code>: This option
+                    specifies the maximum number of horizontally adjacent tiles in the current section. Note that if the
+                    viewport width cannot accomodate so many tiles, then this value is automatically capped.</li>
+            </ul>
+        </li>
+    </ul>
+    <div id="api-methods"></div>
+    <h2 class="code-line" data-line-start=90 data-line-end=91><a id="API_methods_90"></a>API methods</h2>
+    <p class="has-line-data" data-line-start="91" data-line-end="92">Once you have created an instance of
+        <code>Tiles</code>, these are the API methods that can be called and their available options:
+    </p>
+    <ul>
+        <li class="has-line-data" data-line-start="92" data-line-end="123">Tiles.<code>addTile({options})</code> returns
+            <code>the ID of the added tile</code>.
+            <ul>
+                <li class="has-line-data" data-line-start="93" data-line-end="98"><code>title</code>
+                    <ul>
+                        <li class="has-line-data" data-line-start="94" data-line-end="95"><code>Type</code>:
+                            <code>string</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="95" data-line-end="96"><code>Default value</code>:
+                            <code>''</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="96" data-line-end="97"><code>Optional</code>:
+                            <code>yes</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="97" data-line-end="98"><code>Description</code>: This
+                            specifies the title of the newly added tile, which is the text that appears on top of each
+                            tile. If this is not provided, no title will appear.</li>
+                    </ul>
+                </li>
+                <li class="has-line-data" data-line-start="98" data-line-end="103"><code>img_src</code>
+                    <ul>
+                        <li class="has-line-data" data-line-start="99" data-line-end="100"><code>Type</code>:
+                            <code>string</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="100" data-line-end="101"><code>Default value</code>:
+                            <code>''</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="101" data-line-end="102"><code>Optional</code>:
+                            <code>yes</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="102" data-line-end="103"><code>Description</code>:
+                            This specifies the source of the image that will appear in the tile. Specifying an image is
+                            optional.</li>
+                    </ul>
+                </li>
+                <li class="has-line-data" data-line-start="103" data-line-end="108"><code>hover_color</code>
+                    <ul>
+                        <li class="has-line-data" data-line-start="104" data-line-end="105"><code>Type</code>:
+                            <code>string</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="105" data-line-end="106"><code>Default value</code>:
+                            <code>cyan</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="106" data-line-end="107"><code>Optional</code>:
+                            <code>yes</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="107" data-line-end="108"><code>Description</code>:
+                            This specifies the color of the outline that will appear when the tile is hovered over.</li>
+                    </ul>
+                </li>
+                <li class="has-line-data" data-line-start="108" data-line-end="113"><code>clickLink</code>
+                    <ul>
+                        <li class="has-line-data" data-line-start="109" data-line-end="110"><code>Type</code>:
+                            <code>string</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="110" data-line-end="111"><code>Default value</code>:
+                            <code>''</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="111" data-line-end="112"><code>Optional</code>:
+                            <code>yes</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="112" data-line-end="113"><code>Description</code>:
+                            This specifies an optional link that can be opened when the tile is clicked.</li>
+                    </ul>
+                </li>
+                <li class="has-line-data" data-line-start="113" data-line-end="118"><code>alt_img</code>
+                    <ul>
+                        <li class="has-line-data" data-line-start="114" data-line-end="115"><code>Type</code>:
+                            <code>string</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="115" data-line-end="116"><code>Default value</code>:
+                            <code>''</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="116" data-line-end="117"><code>Optional</code>:
+                            <code>yes</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="117" data-line-end="118"><code>Description</code>:
+                            This specifies an alternative image that can be shown when the tile is clicked. This option
+                            cannot be used in conjuction with <code>clickLink</code>.</li>
+                    </ul>
+                </li>
+                <li class="has-line-data" data-line-start="118" data-line-end="123"><code>click_callback</code>
+                    <ul>
+                        <li class="has-line-data" data-line-start="119" data-line-end="120"><code>Type</code>:
+                            <code>function</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="120" data-line-end="121"><code>Default value</code>:
+                            <code>null</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="121" data-line-end="122"><code>Optional</code>:
+                            <code>yes</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="122" data-line-end="123"><code>Description</code>:
+                            This specifies a function that should be called when the tile is clicked. The function must
+                            take 1 argument. Upon being clicked, the function will be called as <code>f(tile)</code>,
+                            where <code>tile</code> will represent the current state of the tile.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="has-line-data" data-line-start="123" data-line-end="125">Tiles.<code>sort()</code>
+            <ul>
+                <li class="has-line-data" data-line-start="124" data-line-end="125">Sorts the tiles in the current
+                    section by order of their creation.</li>
+            </ul>
+        </li>
+        <li class="has-line-data" data-line-start="125" data-line-end="127">Tiles.<code>shuffle()</code>
+            <ul>
+                <li class="has-line-data" data-line-start="126" data-line-end="127">Shuffles the tiles in the current
+                    section randomly.</li>
+            </ul>
+        </li>
+        <li class="has-line-data" data-line-start="127" data-line-end="133">Tiles.<code>flip(tileid)</code>
+            <ul>
+                <li class="has-line-data" data-line-start="128" data-line-end="129">A tile may have a secondary image to
+                    show. The flip method swaps the current displayed image for the secondary image.</li>
+                <li class="has-line-data" data-line-start="129" data-line-end="133"><code>tileid</code>
+                    <ul>
+                        <li class="has-line-data" data-line-start="130" data-line-end="131"><code>Type</code>:
+                            <code>string or number (integer)</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="131" data-line-end="132"><code>Optional</code>:
+                            <code>no</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="132" data-line-end="133"><code>Description</code>:
+                            The ID of the tile to flip.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="has-line-data" data-line-start="133" data-line-end="139">Tiles.<code>disable(tileid)</code>
+            <ul>
+                <li class="has-line-data" data-line-start="134" data-line-end="135">A tile can be disabled if the
+                    developer wants to limit user interaction with the tile. A disabled tile will not perform any
+                    onclick actions.</li>
+                <li class="has-line-data" data-line-start="135" data-line-end="139"><code>tileid</code>
+                    <ul>
+                        <li class="has-line-data" data-line-start="136" data-line-end="137"><code>Type</code>:
+                            <code>string or number (integer)</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="137" data-line-end="138"><code>Optional</code>:
+                            <code>no</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="138" data-line-end="139"><code>Description</code>:
+                            The ID of the tile to disable.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="has-line-data" data-line-start="139" data-line-end="141">Tiles.<code>disableAll()</code>
+            <ul>
+                <li class="has-line-data" data-line-start="140" data-line-end="141">Disables all tiles in the section.
+                </li>
+            </ul>
+        </li>
+        <li class="has-line-data" data-line-start="141" data-line-end="147">Tiles.<code>enable(tileid)</code>
+            <ul>
+                <li class="has-line-data" data-line-start="142" data-line-end="143">Reverses the effects of
+                    <code>disable()</code>. Note that if the section has been disabled by <code>disableAll()</code>,
+                    then simply calling enable will not work.
+                </li>
+                <li class="has-line-data" data-line-start="143" data-line-end="147"><code>tileid</code>
+                    <ul>
+                        <li class="has-line-data" data-line-start="144" data-line-end="145"><code>Type</code>:
+                            <code>string or number (integer)</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="145" data-line-end="146"><code>Optional</code>:
+                            <code>no</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="146" data-line-end="147"><code>Description</code>:
+                            The ID of the tile to enable.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="has-line-data" data-line-start="147" data-line-end="155">Tiles.<code>enableAll(propagate)</code>
+            <ul>
+                <li class="has-line-data" data-line-start="148" data-line-end="149">Enables all tiles in the section.
+                </li>
+                <li class="has-line-data" data-line-start="149" data-line-end="155"><code>propagate</code>
+                    <ul>
+                        <li class="has-line-data" data-line-start="150" data-line-end="151"><code>Type</code>:
+                            <code>boolean</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="151" data-line-end="152"><code>Optional</code>:
+                            <code>no</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="152" data-line-end="153"><code>Default value</code>:
+                            <code>false</code>
+                        </li>
+                        <li class="has-line-data" data-line-start="153" data-line-end="155"><code>Description</code>:
+                            This parameter specifies whether to propagate the effects of the <code>enableAll()</code>
+                            call to all the tiles in this section. If a tile has been disabled by a call to
+                            <code>disable()</code>, calling <code>enableAll(false)</code> will not enable that tile, but
+                            calling <code>enableAll(true)</code> will.
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <p class="has-line-data" data-line-start="155" data-line-end="156"><a href="#quick-navigation">Back to top</a></p>
+    <div style="float: right;">&copy; Copyright 2021 Haocheng Hu</div>
+</body>
+
+</html>
